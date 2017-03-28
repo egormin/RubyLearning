@@ -1,6 +1,73 @@
-rvm Ruby Version Manager (Наиболее популярный способ установки)
+rvm Ruby Version Manager (Наиболее популярный способ установки)   rvm.io
 
 ##### RVM INSTALLATION #####
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 \curl -sSL https://get.rvm.io | bash -s stable
+rvm requirements (доустановить необходимые завистмости)
+
+bash --login   # (reload shell)
+
+# Show rvm Version
+rvm -v
+
+
+##### WORKING WITH RVM #####
+# Show installed versions of ruby
+rvm list
+
+# Show available for installation versions of ruby
+rvm list known
+
+# Install ruby ver. 2.4.1
+rvm install ruby-2.4.1
+
+
+# We can have several versions of ruby on machine. To select needed:
+rvm use 2.4.1
+
+# To select needed and make it as default:
+rvm use 2.4.1 --default
+
+# So we can use
+rvm use default
+
+# Here are files and dirrs with rvm and ruby (all versions)
+~/.rvm
+
+### GEM SETS ###
+# Show created gemsets
+rvm gemset list
+
+# Create gemset <my>
+rvm gemset create my
+
+# Use gemset <my>
+rvm gemset use my
+
+# Use gemset as default <my>
+rvm gemset use my --default
+
+# Use default gemset <my>
+rvm gemset default
+
+# Create and use gemset <backuping>
+rvm gemset use 2.4.1@backuping --create
+
+# To generate manuals
+rvm docs generate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
