@@ -57,6 +57,18 @@ rvm gemset use 2.4.1@backuping --create
 rvm docs generate
 
 
+##### WORKING WITH GEMS#####
+
+# Show installed gems
+gem list
+
+# Installed gem <pry>
+gem install pry
+
+# Uninstalled gem <pry>
+gem uninstall pry
+
+
 
 
 
