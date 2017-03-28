@@ -53,6 +53,9 @@ rvm gemset default
 # Create and use gemset <backuping>
 rvm gemset use 2.4.1@backuping --create
 
+# Delete gemset <my>
+rvm gemset delete my
+
 # To generate manuals
 rvm docs generate
 
