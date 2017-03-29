@@ -60,6 +60,29 @@ puts case a
 # a = "456"    You passed a string
 # a = 456    You gave me 456 -- I have no idea what to do with that.
 
+
+puts case
+       when 1 > 5
+         "1 > 5"
+       when 1 < 5
+         "1 < 5"
+       else
+         "else"
+     end
+# 1 < 5
+
+a = 10
+puts case a
+       when 1 > 5
+         "1 > 5"
+       when 1 < 5
+         "1 < 5"
+       else
+         "else"
+     end
+# else
+
+
 puts "5 > 2" if 5 > 2
 # 5 > 2
 
