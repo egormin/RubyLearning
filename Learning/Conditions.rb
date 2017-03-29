@@ -60,3 +60,6 @@ puts case a
 # a = "456"    You passed a string
 # a = 456    You gave me 456 -- I have no idea what to do with that.
 
+puts "5 > 2" if 5 > 2
+# 5 > 2
+
