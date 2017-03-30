@@ -2,21 +2,6 @@
 
 
 
-def fib(n)
-  return 1 if n <= 2
-
-  fib_index = 3
-  a, b = 1, 1
-
-  while fib_index <= n
-    c = a + b
-    a = b
-    b = c
-    fib_index += 1
-  end
-  c
-end
-
 
 if ARGV.size > 1
   puts "Only 1 argument needed"
@@ -25,7 +10,20 @@ end
 
 
 if ARGV[0]
-  p (1..ARGV[0].to_i).map {|i| fib(i)}
+
+  result  = [1, 1]
+  i = 0
+  while result.size <= ARGV[0].to_i
+    if i == 0 || i == 1
+      i+=1
+      next
+    end
+    result << result[i-2] + result[i-1]
+
+    i+=1
+  end
+  p result
+
 else
   puts "Mandatory argument missed"
 end

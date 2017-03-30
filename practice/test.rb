@@ -1,19 +1,22 @@
 #!/usr/bin/env ruby
 
-#comment
-puts 2 + 2
-
-puts "Hello!"  #comment
-
-=begin
-multi
-line
-commens
-=end
+chislo = 1000
 
 
-print "Hello"
-print "Hello!!!"
 
-p "Hello"
-p "Hello!!!"
+
+
+result  = [1, 1]
+i = 0
+
+while result.size <= chislo
+  if i == 0 || i == 1
+    i+=1
+    next
+  end
+  result << result[i-2] + result[i-1]
+
+  i+=1
+end
+
+p result
