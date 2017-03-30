@@ -1,22 +1,14 @@
 #!/usr/bin/env ruby
+=begin
+Дано целое число. Найти и вывести сумму его цифр.
+=end
 
-chislo = 1000
+chislo = 123456
+array_from_chislo = chislo.to_i.to_s.split(//)
 
-
-
-
-
-result  = [1, 1]
-i = 0
-
-while result.size <= chislo
-  if i == 0 || i == 1
-    i+=1
-    next
-  end
-  result << result[i-2] + result[i-1]
-
-  i+=1
+result = 0
+array_from_chislo.each do |e|
+  result += array_from_chislo[e.to_i-1].to_i
 end
 
 p result

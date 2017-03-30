@@ -1,20 +1,25 @@
 #!/usr/bin/env ruby
 
+###################################################### 1 ######################################################
+=begin
+Написать скрипт, который выводит последовательность чисел Фибонначи
+=end
 
-
-
+#If more then 1 argument has been entered
 if ARGV.size > 1
   puts "Only 1 argument needed"
   exit
 end
 
+#Does argument not missing and is digit?
+if ARGV[0].to_f == 0
+  puts "Wrong or missing mandatory argument!!!"
+  exit
+end
 
-if ARGV[0]
-
-  result  = [1, 1]
-  i = 0
-  while result.size <= ARGV[0].to_i
-    if i == 0 || i == 1
+  result, i = [1, 1], 0
+  while result.size < ARGV[0].to_i
+    if i < 2
       i+=1
       next
     end
@@ -24,42 +29,143 @@ if ARGV[0]
   end
   p result
 
-else
-  puts "Mandatory argument missed"
-end
+# RESULT:
+# [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946]
 
 
 
+###################################################### 2 ######################################################
+=begin
+Создать переменную для строки "dniMyMdegnahCybuR". Написать однострочную инструкцию,
+которая поменяет порядок букв на противоположный и понизит все буквы в регистре кроме первой.
+Вывести результат. Значение переменной должно быть изменено.
+=end
 
 #phrase = "dniMyMdegnahCybuR"
 phrase = "dlroWolleH"
 
 puts phrase.reverse.downcase.capitalize
 
+# RESULT:
+# Helloworld
+
+
+###################################################### 3 ######################################################
+=begin
+Дано семизначное число. Вывести на экран число, где первая цифра стала последней, вторая предпоследней и тд.
+=end
+chislo = 1234567
+puts chislo.to_s.reverse
+
+# RESULT:
+# 7654321
+
+
+###################################################### 4 ######################################################
+=begin
+Дано целое число. Найти и вывести сумму его цифр.
+=end
+
+chislo = 1234567
+array_from_chislo = chislo.to_s.split(//)
+
+result = 0
+array_from_chislo.each do |e|
+  result += array_from_chislo[e.to_i-1].to_i
+end
+
+p result
+
+# RESULT:
+# 28
+
+
+###################################################### 5 ######################################################
+=begin
+Дана строка. Необходимо подсчитать количество букв "а" в этой строке (независимо от регистра)
+=end
+
+stroka = "absjYAVbdkAAklda"
+p stroka.count("a") + stroka.count("A")
+
+# RESULT:
+# 5
+
+###################################################### 6 ######################################################
+=begin
+Дана строка. Проверить, является ли она палиндромом
+=end
 phrase = "124421"
-if phrase == phrase.reverse
-  puts "This is a polindrom"
-else
-  puts "This is not polindrom"
+p (phrase == phrase.reverse)? "This is a polindrom" : "This is not polindrom"
+
+# RESULT:
+# This is a polindrom
+
+
+###################################################### 7 ######################################################
+=begin
+циклом вывести на экран числа от 10 до 3 не влючая 5, причём числа, кратные
+3м, вывести в квадрате :
+=end
+
+10.step(3, -1)  do |index|
+  if index == 5 then next end
+  p index = index % 3 == 0? index**2 : index
 end
 
+# RESULT:
+# 10
+# 81
+# 8
+# 7
+# 36
+# 4
+# 9
+
+###################################################### 8 ######################################################
+=begin
+дан хэш shop = {milk: 10, bread: 8, cornflakes: 12, ice_cream: 15, pie: 20}
+ответить на вопрос: если ли в магазине какойлибо
+продукт с ценой в 15?
+=end
+
+shop = {milk: 10, bread: 8, cornflakes: 12, ice_cream: 15, pie: 20}
+result = shop.key(15)
+p result ? "Yes, we have a product with price 15. It is #{result}" : "No, we have not got such product"
+
+# RESULT:
+# "Yes, we have a product with price 15. It is ice_cream"
 
 
-aaa = 1234567
-puts aaa.to_s.reverse
+###################################################### 9 ######################################################
+=begin
+дан массив ar = [1, 6,1,8,2,1,3,5]. Прибавить 100 к его максимальному элементу:
+=end
 
-bbb = 12345
-xxx = bbb.to_s.split(//)
-puts xxx[1]
+ar = [1, 6,1,8,2,-1,3,5]
+p ar.map!{ |x| x == ar.max ? x + 100: x }
 
-res = 0
-i=0
-while i <= xxx.size
- res += xxx[i].to_i
-  i+=1
-end
+# RESULT:
+# [1, 6, 1, 108, 2, -1, 3, 5]
 
-puts res
+
+###################################################### 10 ######################################################
+=begin
+дан массив: ar = [7, 3, [4, 5, 1], 1, 9, [2, 8, 1]]. вывести отсортированный по убыванию массив из уникальных элементов
+начального массива
+=end
+
+ar = [7, 3, [4, 5, 1], 1, 9, [2, 8, 1]]
+p ar.flatten.uniq.sort.reverse
+
+# RESULT:
+# [9, 8, 7, 5, 4, 3, 2, 1]
+
+
+
+
+
+
 
 
 

@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 
-puts "##### Privedenie tipov #####"
+
+# https://ru.wikibooks.org/wiki/Ruby/%D0%A1%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA/Object
+# https://ruby-doc.org/core-2.2.0/
+
+puts "1 ##### Privedenie tipov #####"
 a = 5
 p a.class        # Integer
 
@@ -8,12 +12,12 @@ p a.to_s.class   # String
 p a.to_c.class   # Complex
 p a.to_f.class   # Float
 
-puts "\n##### abs #####"
+puts "\n2 ##### abs #####"
 # Po modulyu
 a = -10
 p a.abs  # 10
 
-puts "\n##### methods #####"
+puts "\n3 ##### methods #####"
 # pokazivaet vse metody ob'ekta
 p a.methods
 =begin
@@ -31,10 +35,111 @@ p a.methods
 :instance_variables, :instance_variable_defined?, :!, :!=, :__send__, :equal?, :instance_eval, :instance_exec, :__id__]
 =end
 
-puts "\n##### object_id #####"
+puts "\n4 ##### object_id #####"
 # id ob'ekta v pamyati
 a = [1,2]
 p a.object_id   # 20302040
+
+puts "\n5 ##### odd #####"
+# Proverka na nechetnost'
+p 5.odd?  # true
+p 6.odd?  # false
+
+puts "\n6 ##### even #####"
+# Proverka na chetnost'
+p 5.even?  # false
+p 6.even?  # true
+
+puts "\n7 ##### sort #####"
+# sortirovka  (dlya massivov)
+a = [1, 3, 2]
+p a.sort   # [1, 2, 3]
+
+puts "\n8 ##### clone #####"
+a = [1, 3, 2]
+b = a
+b[2] = "X"
+p a         # [1, 3, "X"]
+
+
+a = [1, 3, 2]
+b = a.clone
+b[2] = "X"
+p a         # [1, 3, 2]
+
+
+puts "\n9 ##### between #####"
+# Proverka, nahoditsya li chislo mezhdu zadannymi znacheniyami
+a = 10
+p a.between?(0, 11)  # true
+
+puts "\n10 ##### include #####"
+# Proverka, soderzhitsya li simvol v posledovatel'nosti
+a = "abc"
+p a.include?("n")  # false
+
+puts "\n11 ##### uniq #####"
+a = [1, 2, 1, 3, 2]
+# Ostavlyaet tol'ko unikal'nye znacheniya
+p a.uniq  # [1, 2, 3]
+
+puts "\n12 ##### compact #####"
+# Udalyaet vse nil
+a = [1, nil, 2, nil]
+p a.compact        # [1, 2]
+
+puts "\n13 ##### pop #####"
+# Vydelyaet poslednoy element i udalyaet ego iz massiva
+a = [1, 2, 3]
+p a.pop        # 3
+p a            # [1, 2]
+
+puts "\n14 ##### shift #####"
+# Kak i pop tolko vydelyaet pervyi element i udalyaet ego iz massiva
+a = [1, 2, 3]
+p a.shift
+p a
+
+puts "\n15 ##### unshift #####"
+# Vstavlyaet elementy v nachalo massiva
+a = [1, 2, 3]
+p a.unshift("a", "b")    # ["a", "b", 1, 2, 3]
+
+puts "\n16 ##### push #####"
+# Vstavlyaet elementy v konets massiva
+a = [1, 2, 3]
+p a.push("a", "b")    # [1, 2, 3, "a", "b"]
+
+
+puts "\n17 ##### split #####"
+# razdelenie po simvolu
+a = "a, b, c"
+p a.split(",")  # ["a", " b", " c"]
+
+b = "123"
+p b.split(//)  # ["1", "2", "3"]
+
+puts "\n18 ##### join #####"
+# Ob'edinenie
+a = [1, 2, 3, 2]
+p a.join    # "123"
+
+puts "\n19 ##### inspect #####"
+#Perevodit v stroku
+a = [1, 2, 3, 2]
+p a.inspect      # "[1, 2, 3, 2]"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
