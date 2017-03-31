@@ -50,6 +50,7 @@ p 'a + b = #{a + b}'  # "a + b = \#{a + b}"
 str = 'hello \'Chuck\'!' # Right
 
 
+a = "hello"
 p %q!this is a string in single quotes!   # "this is a string in single quotes"
 p %q{this is a string in single quotes}   # "this is a string in single quotes"
 
@@ -57,7 +58,14 @@ p %q{this is a string in single quotes}   # "this is a string in single quotes"
 
 # 2) Operacii so strokami
 puts "1" + "2"  # 12
+puts "Conca" << "tenation"   # Concatenation
 puts "1" * 5    # 11111
+
+str1 = "A"
+str2 = "B"
+puts str1 + " and " + str2 + " are cool letters!"   # A and B are cool letters!
+puts "#{str1} and #{str2} are cool letters!"        # A and B are cool letters!
+
 
 
 aaa = "Hello, "
@@ -123,6 +131,14 @@ p aaa.empty?  # true
 p "hello".include?("ll")  # true. Proverka, vhodit li simvol v stroku
 
 puts "a" < "z"    # true
+
+# HEREDOC
+str = <<STR
+This is a
+multiline
+STR
+
+p str   # "This is a\nmultiline\n"
 
 
 

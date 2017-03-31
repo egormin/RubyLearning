@@ -125,9 +125,84 @@ a = [1, 2, 3, 2]
 p a.join    # "123"
 
 puts "\n19 ##### inspect #####"
-#Perevodit v stroku
+# Perevodit v stroku
 a = [1, 2, 3, 2]
 p a.inspect      # "[1, 2, 3, 2]"
+
+puts "\n20 ##### capitalize #####"
+# Delaet pervuyu bukvu bolshoi
+a = "abc"
+p a.capitalize      # "Abc"
+
+puts "\n21 ##### upcase #####"
+# Delaet vse bukvy bolshimi
+a = "abc"
+p a.upcase      # "ABC"
+
+puts "\n22 ##### downcase #####"
+# Delaet vse bukvy malenkimi
+a = "abc"
+p a.downcase      # "abc"
+
+puts "\n23 ##### reverse #####"
+# reverse
+a = "abc"
+p a.reverse      # "cba"
+
+puts "\n24 ##### size #####"
+# Dlina peremennoy
+a = "abc"
+p a.size     # 3
+
+puts "\n25 ##### swapcase #####"
+# Izmenyaet registr na protivopolozhniy
+a = "aBc"
+p a.swapcase      # "AbC"
+
+puts "\n26 ##### scan #####"
+# Proverka na nalichie simvolov v stroke
+a = "hello world"
+p a.scan('ello')   # "AbC"    # ["ello"]
+p a.scan('xx')   # "AbC"      # []
+
+puts "\n27 ##### swapcase #####"
+# Izmenyaet registr na protivopolozhniy
+a = "aBc"
+p a.swapcase      # "AbC"
+
+puts "\n28 ##### delete #####"
+# Udalenie simvola iz stroki
+a = "aBc"
+p a.delete 'B'     # "ac"
+
+
+puts "\n29 ##### delete #####"
+# Pustaya li stroka
+a = "aBc"
+p a.empty?  # false
+
+puts "\n30 ##### heredoks #####"
+# Eto mnogostrochnie peremennye
+str = <<ANY
+This is a
+multiline
+ANY
+p str   # "This is a\nmultiline\n"
+
+puts "\n31 ##### delete #####"
+# Pustaya li stroka
+a = "aBc"
+p a.empty?  # false
+
+
+
+
+
+
+
+
+
+
 
 
 
