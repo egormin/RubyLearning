@@ -7,6 +7,8 @@ print "World"
 print ("Hello")
 #HelloWorldHello"Hello"
 
+print 5, " plus ", 6   # 5 plus 6
+
 # S perenosom stroki
 p "Hello"  # "Hello"   v kavychkah
 p "World"  # "World"

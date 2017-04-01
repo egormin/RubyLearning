@@ -87,26 +87,7 @@ for value in [1,2,3,4,5,6,7,8,9,10]   # 1 2 3 4 5 6 7 8 9 10
 end
 
 
-puts "##### ITERATORS (EACH) #####"
 
-[1,2,3,4,5,6,7,8,9,10].each {|value| print "#{value} "}  # 1 2 3 4 5 6 7 8 9 10
-(1..10).each{|e| print e, ', '} # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-
-arr = [1,2,3,4,5,6,7,8,9,10]
-#arr.each {|e| do {puts e } end}
-
-puts "##### ITERATORS (TIMES) #####"
-
-10.times {|i| print "#{i} "}  # 0 1 2 3 4 5 6 7 8 9
-
-
-puts "##### UPTO / STEP #####"
-
-5.upto(10) {|i| print "#{i} "}  # 5 6 7 8 9 10
-
-1.step(10, 2) { |i| print "#{i} "}  # 1 3 5 7 9
-1.step(by: 2, to: 15){|x| print x,", "} # 1, 3, 5, 7, 9, 11, 13, 15,
-('a'..'z').step(2){|ch| print ch, ", "} # a, c, e, g, i, k, m, o, q, s, u, w, y,
 
 
 

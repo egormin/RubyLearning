@@ -202,7 +202,51 @@ bbb = "mytext"
 p bbb.send(aaa)   # "txetym"
 
 
+puts "\n33 ##### & #####"
 
+p ["hello", "good bye"].collect{|arg| arg.upcase}         # ["HELLO", "GOOD BYE"]
+
+# Vot to zhe samoy, tol'ko koroche:
+p ["hello", "good bye"].collect(&:upcase)                 # ["HELLO", "GOOD BYE"]
+
+
+puts "\n34 ##### COUNT #####"
+# Podschet kolichestva elementov, udovletvoryayuschih usloviyu
+b = {a: 100, b: 200, c: 300, d: 400}
+p b.count{|k, v| v > 250}                                  # 2
+
+
+puts "\n34 ##### ANY? #####"
+# Proverka sootvetstviya hotya bi odnogo elementa usloviyu
+a = [1, 2, 3, 4, 5]
+p a.any?{|e| e > 3}           # true
+
+a = [1,2,3,4,5]
+p a.count{|v| v % 2 ==0}                    # 2
+
+p (1..5).count{|v| v**2 >= 16}              # 2
+
+
+puts "\n34 ##### ALL? #####"
+# Proverka sootvetstviya vseh elementov usloviyu
+a = [1, 2, 3, 4, 5]
+p a.all?{|e| e > 3}           # false
+
+
+puts "\n34 ##### DETECT #####"
+# Find to zhe samoe, chto i detect
+# Nahodit pervyi element, kotoryi udovletvoryaet usloviyu
+
+a = [1, 2, 3, 4, 5]
+p a.detect{|e| e > 3}           # 4
+
+
+puts "\n34 ##### SELECT #####"
+# Find_all to zhe samoe, chto i select
+# Nahodit vse elementy, kotorie udovletvoryaet usloviyu
+
+a = [1, 2, 3, 4, 5]
+p a.select{|e| e > 3}           # [4, 5]
 
 
 

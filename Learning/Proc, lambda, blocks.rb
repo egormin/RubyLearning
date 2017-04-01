@@ -2,7 +2,7 @@
 
 
 # proc and lambda are BLOCKS
-puts "##### PROC #####"
+puts "########## PROC ##########"
 
 
 ########## Example 1
@@ -68,5 +68,70 @@ end
 p max_element                # [1, 2, 3, 4]
 # Po idee, nam dolzhni bili vyvesti max element sredi vseh el-tov massiva, no Proc vyhodit iz vypolneniya na pervom zhe return.
 
-# ODNAKO!!!!!
+########## Example 5 (to_proc)
+cap = :capitalize.to_proc
+p cap.call("man")       # "Man"
+
+# Eto to zhe samoe, chto i:
+aaa = Proc.new{|arg| arg.send(:capitalize)}
+p aaa.call("man")             # "Man"
+
+
+puts "########## LAMBDA ##########"
+# Lambda pochtoo to zhe samoe, chto i proc, no est' paru otlichiy:
+
+########## Lyambda priveredliva i rugaetsy, esli ey peredat' menshe znacheniy, chem ona ozhidaet
+
+aaa = lambda{|a,b| p a,b}
+
+#aaa.call("a")      # ERROR  wrong number of arguments (given 1, expected 2) (ArgumentError)
+
+
+
+
+########## Lyambda vozvrascaet ruzultat vsey raboty, a ne vyhodit pri pervom return
+def max_element1
+  p = lambda{ return [1,2,3,4] }   # Tut on vyshel
+  array =p.call
+  return array.max
+end
+p max_element1         # 4
+
+
+
+puts "########## BLOCKS ##########"
+
+def double
+  yield
+  yield
+end
+# Hi
+# Hi
+
+double{ puts "Hi"}
+
+def meth_with_block(hello)
+  p hello
+  yield(hello)
+end
+
+p meth_with_block("eg"){|msg| puts msg}
+#"eg"
+#eg
+#nil
+
+# to zhe samoye
+def meth_with_block(hello, &block)
+  p hello
+  block.call("eg")
+end
+p meth_with_block("eg"){|msg| puts msg}
+#"eg"
+#eg
+#nil
+
+
+
+
+
 
