@@ -180,6 +180,16 @@ a.count_to(5)           # 012345             Etot net, no on popadaet pod method
 a.xxx(5)                #                    Etot net, i on prosto ne otrabotaet
 
 
+########## Example 12
+# Imenovannye parametry
+
+def imenovannye (str: "stringa", num: 99)
+  p "str = #{str}, num = #{num}"
+end
+
+imenovannye(str: "one", num: 1)               # str = one, num = 1"
+
+
 
 
 

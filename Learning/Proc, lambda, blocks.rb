@@ -130,6 +130,33 @@ p meth_with_block("eg"){|msg| puts msg}
 #eg
 #nil
 
+def meth5(&block)
+  p block_given?
+end
+meth5            # false
+
+
+def meth6(var, &block)
+  p block_given?                        # true
+  block.call(var) if block_given?
+end
+meth6("hello"){|val|p val}          # hello
+# true
+# "hello"
+
+# Esli imya peremennoy v bloke i vneshney peremennoy sovpadaet, to mozhno peredat ei znachenie v yield
+def with_one
+  yield(1)
+end
+
+number = 99
+with_one { |number| puts "number равно #{number}" }
+# number равно 1
+
+
+
+
+
 
 
 

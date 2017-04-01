@@ -216,7 +216,7 @@ b = {a: 100, b: 200, c: 300, d: 400}
 p b.count{|k, v| v > 250}                                  # 2
 
 
-puts "\n34 ##### ANY? #####"
+puts "\n35 ##### ANY? #####"
 # Proverka sootvetstviya hotya bi odnogo elementa usloviyu
 a = [1, 2, 3, 4, 5]
 p a.any?{|e| e > 3}           # true
@@ -227,13 +227,13 @@ p a.count{|v| v % 2 ==0}                    # 2
 p (1..5).count{|v| v**2 >= 16}              # 2
 
 
-puts "\n34 ##### ALL? #####"
+puts "\n36 ##### ALL? #####"
 # Proverka sootvetstviya vseh elementov usloviyu
 a = [1, 2, 3, 4, 5]
 p a.all?{|e| e > 3}           # false
 
 
-puts "\n34 ##### DETECT #####"
+puts "\n37 ##### DETECT #####"
 # Find to zhe samoe, chto i detect
 # Nahodit pervyi element, kotoryi udovletvoryaet usloviyu
 
@@ -241,12 +241,51 @@ a = [1, 2, 3, 4, 5]
 p a.detect{|e| e > 3}           # 4
 
 
-puts "\n34 ##### SELECT #####"
+puts "\n38 ##### SELECT #####"
 # Find_all to zhe samoe, chto i select
 # Nahodit vse elementy, kotorie udovletvoryaet usloviyu
 
 a = [1, 2, 3, 4, 5]
 p a.select{|e| e > 3}           # [4, 5]
+
+puts "\n39 ##### BLOCK_GIVEN? #####"
+# Proveryaet byl li peredan blok v metod
+def meth5(&block)
+  p block_given?
+end
+
+meth5             # false
+meth5{p "da"}     # true
+
+
+def meth6(var, &block)
+  p block_given?                        # true
+  block.call(var) if block_given?
+end
+meth6("hello"){|val|p val}          # hello
+# true
+# "hello"
+
+puts "\n40 ##### RESPOND_TO? #####"
+# Proveryaet est' li takoy metod u peremennoy
+
+a = 5
+p a.respond_to?("inspect")   # true
+p a.respond_to?(:inspect)    # true
+p a.respond_to?(:bla_bla)    # false
+
+
+puts "\n41 ##### ALIASES #####"
+def testX
+  puts "Hello"
+end
+alias :new_test :testX              # alias :new_name : old_name
+
+new_test        # Hello
+testX           # Hello
+
+
+
 
 
 

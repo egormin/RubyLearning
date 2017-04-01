@@ -68,6 +68,8 @@ p a.find_all{|v| v > 3}                     # [4, 5]
 
 
 puts "########## METHODS ##########"
+
+# Example 1
 value = Proc.new do
   puts "Hello, Rubby"
 end
@@ -79,7 +81,7 @@ end
 value1.call('Jack')        # Hello, Jack
 
 
-
+# Example 2
 def double
   yield
   yield
@@ -88,7 +90,7 @@ double{ puts "Hi"}
 # Hi
 # Hi
 
-
+# Example 3
 def double1(block)
   p block.class
   block.call
@@ -98,6 +100,86 @@ double1 lambda {puts "Hi"}
 # Proc
 # Hi
 # Hi
+
+
+# Example 4
+def flexy(a, *b)
+  p "a = #{a}, b = #{b}"
+end
+
+flexy(1,2,3,4,5)            # "a = 1, b = [2, 3, 4, 5]"
+
+
+a = 5
+p a.respond_to?("inspect")   # true
+p a.respond_to?(:inspect)    # true
+p a.respond_to?(:bla_bla)    # false
+
+
+# Imenovannye parametry
+
+def imenovannye (str: "stringa", num: 99)
+  p "str = #{str}, num = #{num}"
+end
+
+imenovannye(str: "one", num: 1)               # str = one, num = 1"
+
+
+
+cap = :capitalize.to_proc
+p cap.call("abc")                             # "Abc"
+
+p %w(a b c d e).map(&:upcase)                 # ["A", "B", "C", "D", "E"]
+
+
+def try_proc
+  our_proc = Proc.new { return "EXIT" }
+  our_proc.call
+  "Что хочу то и пишу"
+end
+puts try_proc                 # EXIT
+
+
+
+
+def try_lambda
+  our_lambda = lambda { return "EXIT" }
+  our_lambda.call
+  "Тут уж нужно осторожно"
+end
+puts try_lambda                     # Тут уж нужно осторожно
+
+
+
+def foo(str: "foo", num: 424242, **options)
+  puts [str, num].inspect
+  puts options.inspect
+end
+foo(str: 1,num: 2, test: 1, test2: 2)
+# {:test=>1, :test2=>2}
+
+
+
+def my_method(first_value, *values, name: 'default', **ignore_extra, &block)
+  puts first_value               # 1
+  puts values.inspect            # [2]
+  puts name                      # test
+  puts ignore_extra.inspect      # {:ruby=>"cool"}
+end
+
+my_method(1, 2, name: "test", ruby: "cool")
+
+
+
+def test
+  puts "Hello"
+end
+alias :new_test :test
+
+new_test        # Hello
+test            # Hello
+
+
 
 
 
