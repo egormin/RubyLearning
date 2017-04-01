@@ -195,6 +195,13 @@ a = "aBc"
 p a.empty?  # false
 
 
+puts "\n32 ##### send #####"
+# Preobrazuet stroku v komandu
+aaa = "reverse"
+bbb = "mytext"
+p bbb.send(aaa)   # "txetym"
+
+
 
 
 
