@@ -4,24 +4,16 @@
 =end
 
 
-
-def my_meth(a:1, b:2, **other)
-  block_given?? (other.each{|e| yield(e)}) : (p "ERROR")
+class Array
+  def my_calc
+    self.select{|e| yield(e) if e.even? == true }
+  end
 end
 
-#my_meth(a: 1,b: 2,3,4,5,6)                    # "ERROR"
-#my_meth(a: 1,b: 2,3,4,5,6){|i| puts i}
+puts [1, 2, 3, 4, 5, 6, 7].my_calc{|i| i > 2}.inspect                        # [4, 6]
+puts [1, 2, 3, 4, 5, 6, 7].my_calc {|i| i > 10}.inspect                      # []
+puts [2, 4, 6, 8, 10, 12, 7].my_calc{|i| i.between?(6, 12)}.inspect          # [6, 8, 10, 12]
 
-
-
-def imenovannye (str, num, *oth)
-  p "str = #{str}, num = #{num}, other: #{oth}"
-end
-
-#imenovannye(num: "num", str: "str", add:"d")
-
-def m(*other, foo:, bar:)
-  p "foo = #{foo}, bar = #{bar}, other = #{other}"
-end
-
-m(5, 7, bar: "b", foo: "f" ) # => [3, 3]
+[4, 6]
+[]
+[6, 8, 10, 12]
