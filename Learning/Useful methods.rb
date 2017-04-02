@@ -176,7 +176,7 @@ a = "aBc"
 p a.delete 'B'     # "ac"
 
 
-puts "\n29 ##### delete #####"
+puts "\n29 ##### empty #####"
 # Pustaya li stroka
 a = "aBc"
 p a.empty?  # false
@@ -189,10 +189,6 @@ multiline
 ANY
 p str   # "This is a\nmultiline\n"
 
-puts "\n31 ##### delete #####"
-# Pustaya li stroka
-a = "aBc"
-p a.empty?  # false
 
 
 puts "\n32 ##### send #####"

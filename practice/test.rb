@@ -4,16 +4,33 @@
 =end
 
 
-class Array
-  def my_calc
-    self.select{|e| yield(e) if e.even? == true }
+
+class Test
+  def write
+    puts "write meth"
+  end
+  def read
+    puts "read meth"
   end
 end
 
-puts [1, 2, 3, 4, 5, 6, 7].my_calc{|i| i > 2}.inspect                        # [4, 6]
-puts [1, 2, 3, 4, 5, 6, 7].my_calc {|i| i > 10}.inspect                      # []
-puts [2, 4, 6, 8, 10, 12, 7].my_calc{|i| i.between?(6, 12)}.inspect          # [6, 8, 10, 12]
 
-[4, 6]
-[]
-[6, 8, 10, 12]
+
+cmd = "Test"
+p cmd
+
+
+  instance = (Object.const_get(cmd)).new
+  p instance.write
+
+
+
+
+
+# instance = (Object.const_get(cmd)).new
+#
+# p "class name of cmd #{p cmd.class.name}"
+# p instance.name
+
+
+
