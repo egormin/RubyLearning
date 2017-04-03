@@ -5,23 +5,9 @@
 
 
 
-class Test
-  def write
-    puts "write meth"
-  end
-  def read
-    puts "read meth"
-  end
-end
+hash = {:cost => 150, :weight => 200, :color => "green"}
 
-
-
-cmd = "Test"
-p cmd
-
-
-  instance = (Object.const_get(cmd)).new
-  p instance.write
+p hash.key(150)
 
 
 

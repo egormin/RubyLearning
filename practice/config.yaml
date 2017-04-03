@@ -1,0 +1,9 @@
+node : 10.0.0.15
+user: admin
+password: admin
+email_list:
+  - one
+  - two
+  - three
+email:
+  admin@email.com

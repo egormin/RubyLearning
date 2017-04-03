@@ -1,15 +1,33 @@
 #!/usr/bin/env ruby
 puts "\nHello! This is Command Line Interface emulator
-Designed by EG in 2017\n
+Designed by Yegor in 2017\n
 To exit programm enter exit\n\n"
 
 class Command
-  ALL_COMMANDS = [] #"help", "uptime", "date", "echo"
-  Command::ALL_COMMANDS.push("HelpCommand", "DateCommand")
+  #ALL_COMMANDS = {} #"help", "uptime", "date", "echo"
+  #Command::ALL_COMMANDS.push("HelpCommand", "DateCommand",  "UptimeCommand",  "EchoCommand")
+  #Command::ALL_COMMANDS.push(:HelpCommand => "help", :DateCommand => "date",  :UptimeCommand => "uptime",   :EchoCommand => "echo")
+  Command::ALL_COMMANDS = {:HelpCommand => "help", :DateCommand => "date",  :UptimeCommand => "uptime",   :EchoCommand => "echo"}
+
+  def self.command_by_name(comm)
+       p comm
+       p ALL_COMMANDS.class
+       #HelpCommand.new if comm == "help"
+       p Command::ALL_COMMANDS.key(comm)
+       return ALL_COMMANDS.key(comm)
+       #return DateCommand.new if comm == "date"
+       #return UptimeCommand.new if comm == "uptime"
+       #EchoCommand.new if comm == "echo"
+
+    # cherez iterator
+  end
+
 
  def checking
 
  end
+
+
 
   protected
   def say(*args)
@@ -50,13 +68,11 @@ class HelpCommand < Command
   #p bbb.send(aaa)
 
   def run
-    p "CCCCCC"
-    #p DateCommand.name
-    # for cmd in Command::ALL_COMMANDS
-    #   p cmd
-    #   p cmd.name
-    # end
-    HelpCommand.help
+     for cmd in Command::ALL_COMMANDS
+       p cmd
+       p cmd.name
+     end
+    p "gsfggsgsgsg"
 
   end
 
@@ -126,9 +142,11 @@ while entered_command != "exit"
 
   greeting
   entered_command = gets.strip.downcase
-  DateCommand.new.run if entered_command == "date"
-  UptimeCommand.new.run if entered_command == "uptime"
-  HelpCommand.new.run if entered_command == "help"
+  Command.command_by_name(entered_command).run
+
+  #DateCommand.new.run if entered_command == "date"
+  #UptimeCommand.new.run if entered_command == "uptime"
+  #HelpCommand.new.run if entered_command == "help"
 
 
   #HelpCommand.new.help
