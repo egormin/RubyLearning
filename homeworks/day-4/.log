@@ -1,0 +1,11 @@
+========== SESSION STARTED 2017-04-05 02:32:08 +0300 ==========
+root: 2017-04-05 02:32:10 +0300:  d
+root: 2017-04-05 02:32:10 +0300:  command not found...
+root: 2017-04-05 02:32:14 +0300:  help
+root: 2017-04-05 02:32:14 +0300:  Time: 02:32:14, file: ./cli.rb, ["help - Print help information"]
+root: 2017-04-05 02:32:14 +0300:  Time: 02:32:14, file: ./cli.rb, ["date - Print the system date and time"]
+root: 2017-04-05 02:32:14 +0300:  Time: 02:32:14, file: ./cli.rb, ["uptime - Tell how long the system has been running"]
+root: 2017-04-05 02:32:14 +0300:  Time: 02:32:14, file: ./cli.rb, ["echo - Display a line of text"]
+root: 2017-04-05 02:32:14 +0300:  Time: 02:32:14, file: ./cli.rb, ["ping - Send ICMP ECHO_REQUEST to network hosts"]
+root: 2017-04-05 02:32:14 +0300:  Time: 02:32:14, file: ./cli.rb, ["exit - Exit from script"]
+root: 2017-04-05 02:32:15 +0300:  Good Bye!

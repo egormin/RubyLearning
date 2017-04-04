@@ -3,20 +3,12 @@
 Дано целое число. Найти и вывести сумму его цифр.
 =end
 
+require 'yaml'
+
+config = YAML.load(File.open("cli.yaml"))
+p config
 
 
-hash = {:cost => 150, :weight => 200, :color => "green"}
+x = config["output_log"]
 
-p hash.key(150)
-
-
-
-
-
-# instance = (Object.const_get(cmd)).new
-#
-# p "class name of cmd #{p cmd.class.name}"
-# p instance.name
-
-
-
+p x

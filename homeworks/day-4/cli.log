@@ -1,0 +1,16 @@
+========== SESSION STARTED 2017-04-05 02:37:13 +0300 ==========
+root: 2017-04-05 02:37:19 +0300:  uptime
+root: 2017-04-05 02:37:19 +0300:  5h, 7min, 14sec
+root: 2017-04-05 02:37:23 +0300:  date
+root: 2017-04-05 02:37:23 +0300:  2017-04-05 02:37:23 +0300
+root: 2017-04-05 02:37:29 +0300:  help ping
+root: 2017-04-05 02:37:29 +0300:  Time: 02:37:29, file: /ruby/rubylearning/homeworks/day-4/cli.rb, ["ping - Send ICMP ECHO_REQUEST to network hosts"]
+root: 2017-04-05 02:37:32 +0300:  exit
+root: 2017-04-05 02:37:32 +0300:  Exited by command exit
+========== SESSION STARTED 2017-04-05 02:40:11 +0300 ==========
+root: 2017-04-05 02:40:14 +0300:  uptime
+root: 2017-04-05 02:40:14 +0300:  File /proc/uptie not found
+root: 2017-04-05 02:40:18 +0300:  Good Bye!
+========== SESSION STARTED 2017-04-05 02:41:16 +0300 ==========
+root: 2017-04-05 02:41:19 +0300:  uptime
+root: 2017-04-05 02:41:19 +0300:  File /proc/uptie not found
