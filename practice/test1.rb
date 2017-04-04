@@ -1,6 +1,12 @@
 #!/usr/bin/env ruby
 
-a = 10
-p :a
+
+require 'net/http'
+
+uri = URI('http://example.com/')
+p Net::HTTP.get(uri)
+p Net::HTTP.get_response(uri)
+
+
 
 

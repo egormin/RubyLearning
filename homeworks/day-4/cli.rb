@@ -4,34 +4,19 @@ Designed by Yegor in 2017\n
 To exit programm enter exit\n\n"
 
 class Command
-  #ALL_COMMANDS = {} #"help", "uptime", "date", "echo"
-  #Command::ALL_COMMANDS.push("HelpCommand", "DateCommand",  "UptimeCommand",  "EchoCommand")
-  #Command::ALL_COMMANDS.push(:HelpCommand => "help", :DateCommand => "date",  :UptimeCommand => "uptime",   :EchoCommand => "echo")
-  Command::ALL_COMMANDS = {:HelpCommand => "help", :DateCommand => "date",  :UptimeCommand => "uptime",   :EchoCommand => "echo"}
+  ALL_COMMANDS = []    #"help", "uptime", "date", "echo"
 
   def self.command_by_name(comm)
-       p comm
-       p ALL_COMMANDS.class
-       #HelpCommand.new if comm == "help"
-       p Command::ALL_COMMANDS.key(comm)
-       return ALL_COMMANDS.key(comm)
-       #return DateCommand.new if comm == "date"
-       #return UptimeCommand.new if comm == "uptime"
-       #EchoCommand.new if comm == "echo"
-
-    # cherez iterator
+    sep_com = comm.split(" ")
+    #p sep_com[0]
+    #p sep_com[1]
+    class_name = ALL_COMMANDS.find{|e| e.name == sep_com[0]}
+    class_name.new.run(sep_com[1]) if class_name != nil
   end
-
-
- def checking
-
- end
-
-
 
   protected
   def say(*args)
-    p "meth comm"
+    puts "Time: #{Time.now.strftime("%H:%M:%S")}, file: #{$0}, #{args}"
   end
 
 end
@@ -44,82 +29,91 @@ class HelpCommand < Command
   end
 
   def self.description
-    "print this text"
+    "- Print help information"
   end
 
-  def self.help
-    for cmd in Command::ALL_COMMANDS
-      #p "iteration: #{cmd}"
-      #p "class name of HelpCommand #{p HelpCommand.class.name}"
-      p cmd.class
-      p cmd
-
-      instance = (Object.const_get(cmd)).new          #################################################
-      instance.name
-
-
-      #p var.class
-      #p cmd.send("name")
-      #say "#{cmd.name} #{cmd.description}"
+  def run(*args)
+    if args[0] != nil
+      cmd = Command::ALL_COMMANDS.find{|e| e.name == args[0]}
+      say "#{cmd.name} #{cmd.description}"
+    else
+    Command::ALL_COMMANDS.each{|val| say "#{val.name} #{val.description}"}
     end
-  end
-  #aaa = "reverse"
-  #bbb = "mytext"
-  #p bbb.send(aaa)
-
-  def run
-     for cmd in Command::ALL_COMMANDS
-       p cmd
-       p cmd.name
-     end
-    p "gsfggsgsgsg"
-
   end
 
 end
-
 
 
 class DateCommand < Command
 
   def self.name
-    "help"
+    "date"
   end
 
   def self.description
-    "print this text"
+    "- Print the system date and time"
   end
 
-  def self.help
-    for cmd in Command::ALL_COMMANDS
-      say "#{cmd.name} #{cmd.description}"
-    end
+   def run(*args)
+    p Time.now
+   end
+
+end
+
+
+class EchoCommand < Command
+
+  def self.name
+    "echo"
   end
 
-  def run
-   p Time.now
+  def self.description
+    "- Display a line of text"
+  end
+
+  def run(*args)
+    p (args[0])
   end
 end
 
+
+class PingCommand < Command
+
+  def self.name
+    "ping"
+  end
+
+  def self.description
+    "- Send ICMP ECHO_REQUEST to network hosts"
+  end
+
+  def run(*args)
+    if `ping #{args[0]} -c 1 -W 1 &>0; echo $?`.strip == "0"
+      p "true"
+    else
+      p "false"
+    end
+
+    # I don't use this way, because it checks availability only via uri, not ip
+    #uri = URI('#{args}')
+    #p Net::HTTP.get(uri)
+    #p Net::HTTP.get_response(uri)
+
+  end
+end
 
 
 class UptimeCommand < Command
 
   def self.name
-    "help"
+    "uptime"
   end
 
   def self.description
-    "print this text"
+    "- Tell how long the system has been running"
   end
 
-  def self.help
-    for cmd in Command::ALL_COMMANDS
-      say "#{cmd.name} #{cmd.description}"
-    end
-  end
-
-  def run
+  def run(*args)
     uptime_value = `cat /proc/uptime`.split(" ")[0].to_i
     chasov =  uptime_value / 3600
     minut =  (uptime_value - chasov * 3600) / 60
@@ -136,29 +130,12 @@ def greeting
   print user, "@", machine_name, " #cli >> "
 end
 
-
+Command::ALL_COMMANDS.push(HelpCommand, DateCommand,  UptimeCommand,  EchoCommand, PingCommand)
 entered_command = ""
-while entered_command != "exit"
 
+while entered_command != "exit"
   greeting
   entered_command = gets.strip.downcase
-  Command.command_by_name(entered_command).run
+  Command.command_by_name(entered_command)
 
-  #DateCommand.new.run if entered_command == "date"
-  #UptimeCommand.new.run if entered_command == "uptime"
-  #HelpCommand.new.run if entered_command == "help"
-
-
-  #HelpCommand.new.help
-
-
-
-
-
-
-  end
-
-
-
-
-
+end
