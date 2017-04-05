@@ -7,12 +7,12 @@ class Command
   ALL_COMMANDS = []
 
   def self.command_by_name(comm)
-    sep_com = comm.split(" ")
+    sep_com = comm.split(' ')
     class_name = ALL_COMMANDS.find{|e| e.name == sep_com[0]}
     begin
       class_name.new.run(sep_com[1]) #if class_name != nil
-    rescue NoMethodError
-      Logger.common_err 'command not found...'
+    rescue NoMethodError => e
+      Logger.common_err('command not found...', e)
     end
   end
 
@@ -31,7 +31,8 @@ class HelpCommand < Command
   end
 
   def self.description
-    '- Print help information'
+    conf = Config_data.yaml_config['commands']
+    conf[conf.keys.find{|v| v == name}]
   end
 
   def run(*args)
@@ -39,12 +40,11 @@ class HelpCommand < Command
       cmd = Command::ALL_COMMANDS.find{|e| e.name == args[0]}
       begin
         say "#{cmd.name} #{cmd.description}"
-      rescue NoMethodError
-        Logger.common_err 'wrong argument...'
+      rescue NoMethodError => e
+        Logger.common_err('wrong argument...', e)
       end
-
     else
-    Command::ALL_COMMANDS.each{|val| say "#{val.name} #{val.description}"}
+      Command::ALL_COMMANDS.each{|val| say "#{val.name} #{val.description}"}
     end
   end
 
@@ -58,7 +58,8 @@ class DateCommand < Command
   end
 
   def self.description
-    '- Print the system date and time'
+    conf = Config_data.yaml_config['commands']
+    conf[conf.keys.find{|v| v == name}]
   end
 
    def run(*args)
@@ -75,12 +76,14 @@ class EchoCommand < Command
   end
 
   def self.description
-    '- Display a line of text'
+    conf = Config_data.yaml_config['commands']
+    conf[conf.keys.find{|v| v == name}]
   end
 
   def run(*args)
     Logger.common_log args[0]
   end
+
 end
 
 
@@ -91,16 +94,17 @@ class PingCommand < Command
   end
 
   def self.description
-    '- Send ICMP ECHO_REQUEST to network hosts'
+    conf = Config_data.yaml_config['commands']
+    conf[conf.keys.find{|v| v == name}]
   end
 
   def run(*args)
 
-    if `ping #{args[0]} -c 1 -W 1 &>0; echo $?`.strip == '0'
+    if `ping #{args[0]} -c 1 -W 1 &>/dev/null; echo $?`.strip == '0'
       Logger.common_log 'true'
     else
       require 'resolv'
-      Logger.common_err( (args[0] =~ Resolv::IPv4::Regex) ? 'false' : 'may be wrong ip entered...')
+      Logger.common_err( (args[0] =~ Resolv::IPv4::Regex) ? 'false' : 'may be wrong ip entered...', ' ')
     end
 
     # I didn't use this way, because it checks availability only via uri, not ip
@@ -119,11 +123,12 @@ class UptimeCommand < Command
   end
 
   def self.description
-    '- Tell how long the system has been running'
+    conf = Config_data.yaml_config['commands']
+    conf[conf.keys.find{|v| v == name}]
   end
 
   def run(*args)
-    uptime_file_path = '/proc/uptie'
+    uptime_file_path = '/proc/uptime'
     begin
       uptime_value = IO.read(uptime_file_path).split(" ")[0].to_i
       chasov = uptime_value / 3600
@@ -131,10 +136,9 @@ class UptimeCommand < Command
       sec = (uptime_value - chasov * 3600) % 60
       Logger.common_log("#{chasov}h, #{minut}min, #{sec}sec")
     rescue SystemCallError => e
-      Logger.common_err ("File #{uptime_file_path} not found")
-        p e.backtrace
-    rescue
-      Logger.common_err ("Cannot execute the command: #{self.class.name}")
+      Logger.common_err("File #{uptime_file_path} not found", e)
+    rescue => e
+      Logger.common_err("Cannot execute the command: #{self.class.name}", e)
     end
 
   end
@@ -148,10 +152,12 @@ class ExitCommand < Command
   end
 
   def self.description
-    '- Exit from script'
+    conf = Config_data.yaml_config['commands']
+    conf[conf.keys.find{|v| v == name}]
   end
 
   def run(*args)
+    p 'Good Bye!'
     Logger.interact_to_log('Exited by command exit')
    exit(0)
   end
@@ -159,30 +165,30 @@ class ExitCommand < Command
 end
 
 
-class Logger
-  require 'yaml'
-  config = YAML.load(File.open("cli.yaml"))
+class Config_data
+  def self.yaml_config
+    require 'yaml'
+    YAML.load(File.open('cli.yaml'))
+  end
+end
 
-  #p @config
-  #err_file = @config['output_log']
-  #p err_file
-  #p config
-  #@err_file = $config['output_log']
-  #@err_file = 'error_log'
+
+class Logger
+
+  config = Config_data.yaml_config
   @err_file = config['error_log']
   @interaction_file = config['output_log']
-  #@interaction_file = "#{(__FILE__).split('.')[0]}.log"
-  #@interaction_file =$config["error_log"]
+  @debug_mod = config['debug']
+  @debug_mod = 'true' if ARGV[0]
 
-
-  def self.common_err(text)
+  def self.common_err(text, e)
     errors_write_to_log(text)
-    errors_write_to_screen(text)
+    write_to_screen(text, e)
     interact_to_log(text)
   end
 
   def self.common_log(text)
-    errors_write_to_screen(text)
+    write_to_screen(text, nil)
     interact_to_log(text)
   end
 
@@ -191,12 +197,13 @@ class Logger
     begin
       File.open(@err_file, 'a'){|f|f.puts "#{(`whoami`).strip}: #{Time.now}:  #{text}"}
     rescue
-      p "can not log errors..."
+      p 'can not log errors...'
     end
   end
 
-  def self.errors_write_to_screen(text)
+  def self.write_to_screen(text, e)
     p text
+    p "#{e.message} #{e.backtrace}" if (@debug_mod && !e.nil?)
   end
 
   def self.interact_to_log(text)
@@ -215,20 +222,16 @@ class Logger
 
 end
 
-
 def greeting
   user = `whoami`.strip
   machine_name = `hostname`.strip
   print user, '@', machine_name,  '#cli >> '
 end
 
-#def yaml_config
-#  require 'yaml'
-#  $config = YAML.load(File.open('cli.yaml'))
-#end
 
 Command::ALL_COMMANDS.push(HelpCommand, DateCommand, UptimeCommand, EchoCommand, PingCommand, ExitCommand)
-entered_command = ""
+entered_command = ''
+
 
 Logger.interact_to_log('SESSION STARTED')
 
@@ -236,11 +239,11 @@ while entered_command != 0
   greeting
 
   begin
-    entered_command = gets.strip.downcase
+    entered_command = STDIN.gets.strip.downcase
 
     Logger.interact_to_log(entered_command)
-  rescue Interrupt
-    Logger.common_err ('Good Bye!')
+  rescue Interrupt => e
+    Logger.common_err('Good Bye!', e)
     exit(0)
   end
 
